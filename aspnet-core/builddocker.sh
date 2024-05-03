@@ -8,4 +8,4 @@ if [ -z "$1" ]
     exit
 fi
 
-docker build . -f ./src/Drop.WMS.HttpApi.Host/Dockerfile -t drop-wms/identity-service:$1
+docker build . -f ./src/Hackathon.HttpApi.Host/Dockerfile -t hackathon/server:$1
