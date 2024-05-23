@@ -1,0 +1,20 @@
+{
+  "App": {
+    "SelfUrl": "http://localhost:5101",
+    "ClientUrl": "http://localhost:5100",
+    "CorsOrigins": "http://*.Hackathon.com,http://localhost:5100",
+    "RedirectAllowedUrls": "http://localhost:5100,http://localhost:44321"
+  },
+  "ConnectionStrings": {
+    "Default": "Host=localhost;Port=5432;Database=Hackathon;User ID=postgres;Password=postgres;"
+  },
+  "AuthServer": {
+    "Authority": "http://localhost:5101",
+    "RequireHttpsMetadata": false,
+    "SwaggerClientId": "Hackathon_Swagger",
+    "DisableSSL":  true
+  },
+  "StringEncryption": {
+    "DefaultPassPhrase": "cqnMREIprHcHiV57"
+  }
+}
