@@ -12,7 +12,7 @@
     "Authority": "http://localhost:5101",
     "RequireHttpsMetadata": false,
     "SwaggerClientId": "Hackathon_Swagger",
-    "DisableSSL":  true
+    "DisableTSL":  true
   },
   "StringEncryption": {
     "DefaultPassPhrase": "cqnMREIprHcHiV57"
