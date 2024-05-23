@@ -1,29 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using Hackathon.EntityFrameworkCore;
+using Hackathon.MultiTenancy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Hackathon.EntityFrameworkCore;
-using Hackathon.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
@@ -47,6 +46,8 @@ public class HackathonHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+        var configuration = context.Services.GetConfiguration();
+
         PreConfigure<OpenIddictBuilder>(builder =>
         {
             builder.AddValidation(options =>
@@ -55,6 +56,14 @@ public class HackathonHttpApiHostModule : AbpModule
                 options.UseLocalServer();
                 options.UseAspNetCore();
             });
+
+            if (configuration.GetValue<bool>("AuthServer:DisableTSL"))
+            {
+                builder.AddServer(o =>
+                {
+                    o.UseAspNetCore().DisableTransportSecurityRequirement();
+                });
+            }
         });
     }
 
@@ -70,6 +79,8 @@ public class HackathonHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+
+        //context.Services.AddSameSiteCookiePolicy();// cookie policy to deal with temporary browser incompatibilities
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -191,6 +202,7 @@ public class HackathonHttpApiHostModule : AbpModule
         {
             app.UseErrorPage();
         }
+        //app.UseCookiePolicy();// added this, Before UseAuthentication or anything else that writes cookies.
 
         app.UseCorrelationId();
         app.UseStaticFiles();
