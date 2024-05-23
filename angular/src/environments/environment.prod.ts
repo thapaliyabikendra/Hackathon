@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'http://localhost:5100';
 
 export const environment = {
   production: true,
@@ -10,16 +10,16 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44318/',
+    issuer: 'http://localhost:5101/',
     redirectUri: baseUrl,
     clientId: 'Hackathon_App',
     responseType: 'code',
     scope: 'offline_access Hackathon',
-    requireHttps: true
+    requireHttps: false
   },
   apis: {
     default: {
-      url: 'https://localhost:44318',
+      url: 'http://localhost:5101',
       rootNamespace: 'Hackathon',
     },
   },
