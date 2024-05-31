@@ -8,7 +8,7 @@ public class HackathonPermissionDefinitionProvider : PermissionDefinitionProvide
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(HackathonPermissions.GroupName);
+        var hackathonGroup = context.AddGroup(HackathonPermissions.GroupName);
         //Define your own permissions here. Example:
         //myGroup.AddPermission(HackathonPermissions.MyPermission1, L("Permission:MyPermission1"));
     }
