@@ -4,6 +4,6 @@ namespace Hackathon.Teams
 {
     public class TeamFilter
     {
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
     }
 }

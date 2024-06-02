@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { StadiumRoutingModule } from './stadium-routing.module';
 import { StadiumComponent } from './stadium.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { StadiumComponent } from './stadium.component';
   imports: [
     CommonModule,
     StadiumRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ]
 })
 export class StadiumModule { }

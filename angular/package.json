@@ -31,6 +31,7 @@
     "@angular/platform-browser-dynamic": "~17.1.0",
     "@angular/router": "~17.1.0",
     "@aspnet/signalr": "^1.0.27",
+    "@ng-select/ng-select": "9.1.0",
     "bootstrap-icons": "~1.8.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.0.0",

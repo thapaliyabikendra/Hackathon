@@ -19,11 +19,11 @@
 			</div>
 			<div class="col-md-2 form-group mb-1">
 				<label for="filter-startDate">{{ '::StartDate' | abpLocalization }}</label>
-				<input type="text" class="form-control" [(ngModel)]="filter.startDate" id="filter-startDate" />
+				<input type="date" class="form-control" [(ngModel)]="filter.startDate" id="filter-startDate" />
 			</div>
 			<div class="col-md-2 form-group mb-1">
 				<label for="filter-endDate">{{ '::EndDate' | abpLocalization }}</label>
-				<input type="text" class="form-control" [(ngModel)]="filter.endDate" id="filter-endDate" />
+				<input type="date" class="form-control" [(ngModel)]="filter.endDate" id="filter-endDate" />
 			</div>
 
 		<div class="col-md-3 mt-2">
@@ -115,11 +115,11 @@
 			</div>
 <div class="form-group">
 				<label for="startDate">{{'::StartDate' | abpLocalization }}</label>
-				<input type="text" id="startDate" class="form-control" formControlName="startDate" />
+				<input type="date" id="startDate" class="form-control" formControlName="startDate" />
 			</div>
 <div class="form-group">
 				<label for="endDate">{{'::EndDate' | abpLocalization }}</label>
-				<input type="text" id="endDate" class="form-control" formControlName="endDate" />
+				<input type="date" id="endDate" class="form-control" formControlName="endDate" />
 			</div>
 
     </form>

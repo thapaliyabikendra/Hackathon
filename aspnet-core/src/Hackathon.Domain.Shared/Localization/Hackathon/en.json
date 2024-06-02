@@ -1,13 +1,14 @@
 {
   "culture": "en",
-  "texts": {
-    "Menu:Home": "Home",
-    "Welcome": "Welcome",
+	"texts": {
+		"Menu:Home": "Home",
+		"Welcome": "Welcome",
 		"Menu:Team": "Team",
 		"Permission:Teams": "Teams",
 		"Permission:Teams.Create": "Create",
 		"Permission:Teams.Edit": "Edit",
-		"Permission:Teams.Delete": "Delete",		"TeamCreated": "Team Created",
+		"Permission:Teams.Delete": "Delete",
+		"TeamCreated": "Team Created",
 		"TeamUpdated": "Team Updated",
 		"TeamDeleted": "Team Deleted",
 
@@ -15,7 +16,8 @@
 		"Permission:Matchs": "Matchs",
 		"Permission:Matchs.Create": "Create",
 		"Permission:Matchs.Edit": "Edit",
-		"Permission:Matchs.Delete": "Delete",		"MatchCreated": "Match Created",
+		"Permission:Matchs.Delete": "Delete",
+		"MatchCreated": "Match Created",
 		"MatchUpdated": "Match Updated",
 		"MatchDeleted": "Match Deleted",
 
@@ -23,7 +25,8 @@
 		"Permission:Groups": "Groups",
 		"Permission:Groups.Create": "Create",
 		"Permission:Groups.Edit": "Edit",
-		"Permission:Groups.Delete": "Delete",		"GroupCreated": "Group Created",
+		"Permission:Groups.Delete": "Delete",
+		"GroupCreated": "Group Created",
 		"GroupUpdated": "Group Updated",
 		"GroupDeleted": "Group Deleted",
 
@@ -31,7 +34,8 @@
 		"Permission:Stadiums": "Stadiums",
 		"Permission:Stadiums.Create": "Create",
 		"Permission:Stadiums.Edit": "Edit",
-		"Permission:Stadiums.Delete": "Delete",		"StadiumCreated": "Stadium Created",
+		"Permission:Stadiums.Delete": "Delete",
+		"StadiumCreated": "Stadium Created",
 		"StadiumUpdated": "Stadium Updated",
 		"StadiumDeleted": "Stadium Deleted",
 
@@ -39,10 +43,11 @@
 		"Permission:Tournaments": "Tournaments",
 		"Permission:Tournaments.Create": "Create",
 		"Permission:Tournaments.Edit": "Edit",
-		"Permission:Tournaments.Delete": "Delete",		"TournamentCreated": "Tournament Created",
+		"Permission:Tournaments.Delete": "Delete",
+		"TournamentCreated": "Tournament Created",
 		"TournamentUpdated": "Tournament Updated",
 		"TournamentDeleted": "Tournament Deleted",
-
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
-  }
+		"DisplayName": "Display Name",
+		"LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+	}
 }

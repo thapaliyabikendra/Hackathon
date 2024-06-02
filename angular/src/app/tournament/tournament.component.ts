@@ -9,7 +9,7 @@ import { TournamentService, TournamentDto, CreateUpdateTournamentDto } from '@pr
   selector: 'app-tournament',
   templateUrl: './tournament.component.html',
   styleUrls: ['./tournament.component.scss'],
-  providers: [ListService],
+  providers: [ListService, TournamentService],
 })
 export class TournamentComponent implements OnInit  {
   data = { items: [], totalCount: 0 } as PagedResultDto<TournamentDto>;
