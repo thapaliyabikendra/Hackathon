@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <UserSecretsId>f4daedb4-d702-4054-89c4-8e1d896995e5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

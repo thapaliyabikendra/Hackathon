@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -13,6 +13,12 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
+using Hackathon.Tournaments;
+using Hackathon.Stadiums;
+using Hackathon.Groups;
+using Hackathon.Matchs;
+using Hackathon.Teams;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 namespace Hackathon.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
@@ -53,7 +59,12 @@ public class HackathonDbContext :
 
     #endregion
 
-    public HackathonDbContext(DbContextOptions<HackathonDbContext> options)
+    public DbSet<Tournament> Tournaments { get; set;}
+	public DbSet<Stadium> Stadiums { get; set;}
+	public DbSet<Group> Groups { get; set;}
+	public DbSet<Match> Matches { get; set;}
+	public DbSet<Team> Teams { get; set;}
+	public HackathonDbContext(DbContextOptions<HackathonDbContext> options)
         : base(options)
     {
 
@@ -76,11 +87,25 @@ public class HackathonDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
+        //builder.Entity<Tournament>(b =>
         //{
-        //    b.ToTable(HackathonConsts.DbTablePrefix + "YourEntities", HackathonConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
+        //    b.ToTable("Tournaments");
+        //    b.ConfigureByConvention(); 
+        //});
+        //builder.Entity<Match>(b =>
+        //{
+        //    b.ToTable("Matches");
+        //    b.ConfigureByConvention();
+        //});
+        //builder.Entity<Group>(b =>
+        //{
+        //    b.ToTable("Tournaments");
+        //    b.ConfigureByConvention();
+        //});
+        //builder.Entity<Tournament>(b =>
+        //{
+        //    b.ToTable("Tournaments");
+        //    b.ConfigureByConvention();
         //});
     }
 }

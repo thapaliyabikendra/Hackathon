@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Hackathon.EntityFrameworkCore.Applications;
 
-[Collection(HackathonTestConsts.CollectionDefinitionName)]
+//[Collection(HackathonTestConsts.CollectionDefinitionName)]
 public class EfCoreSampleAppServiceTests : SampleAppServiceTests<HackathonEntityFrameworkCoreTestModule>
 {
 

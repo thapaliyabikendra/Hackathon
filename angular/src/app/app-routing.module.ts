@@ -25,7 +25,17 @@ const routes: Routes = [
     loadChildren: () =>
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
+	{ path: 'tournaments', loadChildren: () => import('./tournament/tournament.module').then(m => m.TournamentModule) },
+	{ path: 'stadiums', loadChildren: () => import('./stadium/stadium.module').then(m => m.StadiumModule) },
+	{ path: 'groups', loadChildren: () => import('./group/group.module').then(m => m.GroupModule) },
+	{ path: 'matchs', loadChildren: () => import('./match/match.module').then(m => m.MatchModule) },
+	{ path: 'teams', loadChildren: () => import('./team/team.module').then(m => m.TeamModule) },
 ];
+
+
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {})],

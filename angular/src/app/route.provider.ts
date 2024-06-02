@@ -15,6 +15,41 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
-    ]);
+    			{
+				path: 'tournaments',
+				name: '::Menu:Tournament',
+				iconClass: 'fas fa-file-alt',
+				order: 2,
+				layout: eLayoutType.application,
+			},
+			{
+				path: 'stadiums',
+				name: '::Menu:Stadium',
+				iconClass: 'fas fa-file-alt',
+				order: 2,
+				layout: eLayoutType.application,
+			},
+			{
+				path: 'groups',
+				name: '::Menu:Group',
+				iconClass: 'fas fa-file-alt',
+				order: 2,
+				layout: eLayoutType.application,
+			},
+			{
+				path: 'matchs',
+				name: '::Menu:Match',
+				iconClass: 'fas fa-file-alt',
+				order: 2,
+				layout: eLayoutType.application,
+			},
+			{
+				path: 'teams',
+				name: '::Menu:Team',
+				iconClass: 'fas fa-file-alt',
+				order: 2,
+				layout: eLayoutType.application,
+			},
+]);
   };
 }
