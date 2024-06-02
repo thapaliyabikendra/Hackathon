@@ -19,6 +19,7 @@ using Hackathon.Groups;
 using Hackathon.Matchs;
 using Hackathon.Teams;
 using Volo.Abp.EntityFrameworkCore.Modeling;
+using Hackathon.Notifications;
 namespace Hackathon.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
@@ -64,7 +65,10 @@ public class HackathonDbContext :
 	public DbSet<Group> Groups { get; set;}
 	public DbSet<Match> Matches { get; set;}
 	public DbSet<Team> Teams { get; set;}
-	public HackathonDbContext(DbContextOptions<HackathonDbContext> options)
+    public DbSet<Notification> Notifications { get; set; }
+
+
+    public HackathonDbContext(DbContextOptions<HackathonDbContext> options)
         : base(options)
     {
 

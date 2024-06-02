@@ -1,5 +1,7 @@
 using Hackathon.EntityFrameworkCore;
 using Hackathon.MultiTenancy;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
@@ -24,6 +26,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AspNetCore.SignalR;
 using Volo.Abp.Autofac;
+using Volo.Abp.BackgroundJobs.Hangfire;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
@@ -43,7 +46,8 @@ namespace Hackathon;
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule),
-    typeof(AbpAspNetCoreSignalRModule)
+    typeof(AbpAspNetCoreSignalRModule),
+     typeof(AbpBackgroundJobsHangfireModule)
 )]
 public class HackathonHttpApiHostModule : AbpModule
 {
@@ -82,12 +86,27 @@ public class HackathonHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+        ConfigureHangfire(context, configuration);
+        context.Services.AddHangfireServer();
+
 
         //context.Services.AddSameSiteCookiePolicy();// cookie policy to deal with temporary browser incompatibilities
 
         Configure<AbpClockOptions>(options =>
         {
             options.Kind = DateTimeKind.Utc;
+        });
+    }
+    private void ConfigureHangfire(ServiceConfigurationContext context, IConfiguration configuration)
+    {
+        context.Services.AddHangfire(config =>
+        {
+            config.UsePostgreSqlStorage(configuration.GetConnectionString("Default"),
+                new PostgreSqlStorageOptions
+                {
+                    PrepareSchemaIfNecessary = true
+                });
+
         });
     }
 
@@ -237,6 +256,7 @@ public class HackathonHttpApiHostModule : AbpModule
             c.OAuthScopes("Hackathon");
         });
 
+        app.UseHangfireDashboard("/hangfire");
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();

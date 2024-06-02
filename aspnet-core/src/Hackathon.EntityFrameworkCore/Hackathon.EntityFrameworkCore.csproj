@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hackathon.Domain\Hackathon.Domain.csproj" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.12" />
+    <PackageReference Include="Hangfire.PostgreSql" Version="1.20.8" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="8.1.1" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.1.1" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.1.1" />
