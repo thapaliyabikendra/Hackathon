@@ -1,4 +1,4 @@
-import type { CreateUpdateTournamentDto, TournamentDto, TournamentFilter } from './models';
+import type { CreateUpdateTournamentDto, GenerateMatchDto, TournamentDto, TournamentFilter } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -23,6 +23,25 @@ export class TournamentService {
     this.restService.request<any, boolean>({
       method: 'DELETE',
       url: `/api/app/tournament/${id}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  generateMatches = (input: GenerateMatchDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, boolean>({
+      method: 'POST',
+      url: '/api/app/tournament/generate-matches',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  generateRandomDateByStartDateAndEndDate = (startDate: string, endDate: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, string>({
+      method: 'POST',
+      responseType: 'text',
+      url: '/api/app/tournament/generate-random-date',
+      params: { startDate, endDate },
     },
     { apiName: this.apiName,...config });
   

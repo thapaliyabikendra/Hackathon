@@ -12,5 +12,6 @@ namespace Hackathon.Tournaments
         public Task<bool> CreateAsync(CreateUpdateTournamentDto input);
         public Task<bool> UpdateAsync(Guid id, CreateUpdateTournamentDto input);
         public Task<bool> DeleteAsync(Guid id);
+        public Task<bool> GenerateMatchesAsync(GenerateMatchDto input);
     }
 }

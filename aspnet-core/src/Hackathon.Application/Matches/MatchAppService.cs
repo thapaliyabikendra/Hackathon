@@ -1,4 +1,6 @@
 ﻿using Hackathon.Permissions;
+using Hackathon.Teams;
+using Hackathon.Tournaments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,16 +22,22 @@ namespace Hackathon.Matchs
     {
         #region Properties
         private readonly IRepository<Match, Guid> _matchRepository;
+        private readonly IRepository<Tournament, Guid> _tournamentRepository;
+        private readonly IRepository<Team, Guid> _teamRepository;
         private readonly ILogger<MatchAppService> _logger;
         #endregion
 
         #region Constructor
         public MatchAppService(
             IRepository<Match, Guid> matchRepository,
+            IRepository<Tournament, Guid> tournamentRepository,
+            IRepository<Team, Guid> teamRepository,
             ILogger<MatchAppService> logger
         )
         {
             _matchRepository = matchRepository;
+            _tournamentRepository = tournamentRepository;
+            _teamRepository = teamRepository;
             _logger = logger;
         }
         #endregion
@@ -71,14 +79,22 @@ namespace Hackathon.Matchs
                 }
 
                 var matchs = await _matchRepository.GetQueryableAsync();
+                var tournaments = await _tournamentRepository.GetQueryableAsync();
+                var teams = await _teamRepository.GetQueryableAsync();
 
                 var query = (from s in matchs
+                             join t in tournaments on s.TournamentId equals t.Id
+                             join t1 in teams on s.TeamAId equals t1.Id
+                             join t2 in teams on s.TeamBId equals t2.Id
                              select new MatchDto()
                              {
                                  Id = s.Id,
                                  TournamentId = s.TournamentId,
+                                 TournamentName = t.DisplayName,
                                  GroupId = s.GroupId,
                                  TeamAId = s.TeamAId,
+                                 TeamAName = t1.DisplayName,
+                                 TeamBName = t2.DisplayName,
                                  TeamBId = s.TeamBId,
                                  MatchDate = s.MatchDate,
                                  TeamAScore = s.TeamAScore,

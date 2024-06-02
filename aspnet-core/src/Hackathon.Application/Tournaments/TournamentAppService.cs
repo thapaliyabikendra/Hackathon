@@ -1,4 +1,6 @@
-﻿using Hackathon.Permissions;
+﻿using Hackathon.Groups;
+using Hackathon.Matchs;
+using Hackathon.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,16 +22,22 @@ namespace Hackathon.Tournaments
     {
         #region Properties
         private readonly IRepository<Tournament, Guid> _tournamentRepository;
+        private readonly IRepository<Match, Guid> _matchRepository;
+        private readonly IRepository<Group, Guid> _groupRepository;
         private readonly ILogger<TournamentAppService> _logger;
         #endregion
 
         #region Constructor
         public TournamentAppService(
             IRepository<Tournament, Guid> tournamentRepository,
+            IRepository<Match, Guid> matchRepository,
+            IRepository<Group, Guid> groupRepository,
             ILogger<TournamentAppService> logger
         )
         {
             _tournamentRepository = tournamentRepository;
+            _matchRepository = matchRepository;
+            _groupRepository = groupRepository;
             _logger = logger;
         }
         #endregion
@@ -201,6 +209,112 @@ namespace Hackathon.Tournaments
                 _logger.LogInformation($"::TournamentAppService:: - DeleteAsync - ::Ended::");
             }
         }
+
+        [Authorize(HackathonPermissions.Tournaments.Default)]
+        public async Task<bool> GenerateMatchesAsync(GenerateMatchDto input)
+        {
+            try
+            {
+                _logger.LogInformation($"::TournamentAppService:: - GenerateMatchesAsync - ::Started::");
+
+                var tournament = await _tournamentRepository.FirstOrDefaultAsync(s => s.Id == input.TournamentId);
+                if (tournament == null)
+                {
+                    var msg = "Tournament Not Found.";
+                    _logger.LogInformation($"::TournamentAppService:: - GenerateMatchesAsync - ::{msg}::");
+                    throw new AbpValidationException(msg,
+                        new List<ValidationResult>
+                        {
+                            new ValidationResult(msg, new []{ "id" })
+                        }
+                    );
+                }
+
+                var matches = new List<Match>();
+
+                // Step 1: Group Stage
+                var groups = DivideIntoGroups(input.TeamIds);
+
+                var groupsNew = groups.Select(s => new Group {
+                    TournamentId =  input.TournamentId,
+                    GroupName = $"Group {s.Id}"
+                }).ToList();
+
+                await _matchRepository.InsertManyAsync(matches);
+
+                foreach (var group in groups)
+                {
+                    var groupMatches = GenerateGroupStageMatches(group.Teams, input.StadiumIds, tournament);
+                    matches.AddRange(groupMatches);
+                }
+
+                await _matchRepository.InsertManyAsync(matches);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"::TournamentAppService:: - GenerateMatchesAsync - ::Exception:: - {ex.Message}");
+                throw new UserFriendlyException(ex.Message);
+            }
+        }
+
+
+        private List<GroupTeamDto> DivideIntoGroups(List<Guid> teams)
+        {
+            // Example: Divide into 2 groups
+            int numGroups = 2;
+            int groupSize = (int)Math.Ceiling((double)teams.Count / numGroups);
+            return teams.Select((x, i) => new { Index = i, Value = x })
+                        .GroupBy(x => x.Index / groupSize)
+                        .Select(x => new GroupTeamDto { Id = x.Key, Teams = x.Select(v => v.Value).ToList() })
+                        .ToList();
+        }
+
+   
+        private List<Match> GenerateGroupStageMatches(List<Guid> group, List<Guid> stadiums, Tournament tournament)
+        {
+            var matches = new List<Match>();
+
+            for (int i = 0; i < group.Count - 1; i++)
+            {
+                for (int j = i + 1; j < group.Count; j++)
+                {
+                    var match = new Match
+                    {
+                        TeamAId = group[i],
+                        TeamBId = group[j],
+                        TournamentId = tournament.Id,
+                        StadiumId = GetRandomStadium(stadiums),
+                        MatchDate = GenerateRandomDate(tournament.StartDate, tournament.EndDate)
+                    };
+                    matches.Add(match);
+                }
+            }
+
+            return matches;
+        }
+
+        public DateTime GenerateRandomDate(DateTime startDate, DateTime endDate)
+        {
+            long minTicks = startDate.Ticks;
+            long maxTicks = endDate.Ticks;
+
+            // Generate a random number of ticks within the range
+            long randomTicks = (long)(new Random().NextDouble() * (maxTicks - minTicks)) + minTicks;
+
+            // Convert the ticks to a DateTime object
+            return new DateTime(randomTicks);
+        }
+
+        private Guid GetRandomStadium(List<Guid> stadiums)
+        {
+            return stadiums[new Random().Next(stadiums.Count)];
+        }
         #endregion
     }
+}
+public class GroupTeamDto
+{
+    public int Id { get; set; }
+    public List<Guid> Teams { get; set; }
 }

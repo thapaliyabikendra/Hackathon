@@ -6,6 +6,7 @@ namespace Hackathon.Matchs
     public class Match : FullAuditedAggregateRoot<Guid>
     {
         public Guid TournamentId { get; set; }
+        public Guid StadiumId { get; set; }
         public Guid? GroupId { get; set; }
         public Guid TeamAId { get; set; }
         public Guid TeamBId { get; set; }

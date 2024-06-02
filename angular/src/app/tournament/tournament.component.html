@@ -95,9 +95,17 @@
         </ng-template>
       </ngx-datatable-column>
       			<ngx-datatable-column [name]="'::DisplayName' | abpLocalization" prop="displayName"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::StartDate' | abpLocalization" prop="startDate"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::EndDate' | abpLocalization" prop="endDate"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::StartDate' | abpLocalization" prop="startDate">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.startDate | date : 'dd/MM/YYYY' }}
+              </ng-template>
+            </ngx-datatable-column>
 
+            <ngx-datatable-column [name]="'::EndDate' | abpLocalization" prop="endDate">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.endDate | date : 'dd/MM/YYYY' }}
+              </ng-template>
+            </ngx-datatable-column>
     </ngx-datatable>
   </div>
 </div>

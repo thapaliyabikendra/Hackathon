@@ -12,9 +12,12 @@ export interface CreateUpdateMatchDto {
 export interface MatchDto {
   id?: string;
   tournamentId?: string;
+  tournamentName?: string;
   groupId?: string;
   teamAId?: string;
+  teamAName?: string;
   teamBId?: string;
+  teamBName?: string;
   matchDate?: string;
   teamAScore?: number;
   teamBScore?: number;

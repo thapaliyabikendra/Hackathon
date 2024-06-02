@@ -5,6 +5,12 @@ export interface CreateUpdateTournamentDto {
   endDate?: string;
 }
 
+export interface GenerateMatchDto {
+  tournamentId: string;
+  teamIds: string[];
+  stadiumIds: string[];
+}
+
 export interface TournamentDto {
   id?: string;
   displayName?: string;

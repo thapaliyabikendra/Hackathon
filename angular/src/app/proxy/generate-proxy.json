@@ -2589,6 +2589,23 @@
                     "type": "System.Boolean",
                     "typeSimple": "boolean"
                   }
+                },
+                {
+                  "name": "GenerateMatchesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Hackathon.Tournaments.GenerateMatchDto, Hackathon.Application.Contracts",
+                      "type": "Hackathon.Tournaments.GenerateMatchDto",
+                      "typeSimple": "Hackathon.Tournaments.GenerateMatchDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
                 }
               ]
             }
@@ -2866,6 +2883,100 @@
               },
               "allowAnonymous": false,
               "implementFrom": "Hackathon.Tournaments.ITournamentAppService"
+            },
+            "GenerateMatchesAsyncByInput": {
+              "uniqueName": "GenerateMatchesAsyncByInput",
+              "name": "GenerateMatchesAsync",
+              "httpMethod": "POST",
+              "url": "api/app/tournament/generate-matches",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Hackathon.Tournaments.GenerateMatchDto, Hackathon.Application.Contracts",
+                  "type": "Hackathon.Tournaments.GenerateMatchDto",
+                  "typeSimple": "Hackathon.Tournaments.GenerateMatchDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Hackathon.Tournaments.GenerateMatchDto",
+                  "typeSimple": "Hackathon.Tournaments.GenerateMatchDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Hackathon.Tournaments.ITournamentAppService"
+            },
+            "GenerateRandomDateByStartDateAndEndDate": {
+              "uniqueName": "GenerateRandomDateByStartDateAndEndDate",
+              "name": "GenerateRandomDate",
+              "httpMethod": "POST",
+              "url": "api/app/tournament/generate-random-date",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "startDate",
+                  "typeAsString": "System.DateTime, System.Private.CoreLib",
+                  "type": "System.DateTime",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "endDate",
+                  "typeAsString": "System.DateTime, System.Private.CoreLib",
+                  "type": "System.DateTime",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "startDate",
+                  "name": "startDate",
+                  "jsonName": null,
+                  "type": "System.DateTime",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "endDate",
+                  "name": "endDate",
+                  "jsonName": null,
+                  "type": "System.DateTime",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.DateTime",
+                "typeSimple": "string"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Hackathon.Tournaments.TournamentAppService"
             }
           }
         }
@@ -5726,6 +5837,18 @@
           "regex": null
         },
         {
+          "name": "TournamentName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "GroupId",
           "jsonName": null,
           "type": "System.Guid?",
@@ -5750,9 +5873,33 @@
           "regex": null
         },
         {
+          "name": "TeamAName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "TeamBId",
           "jsonName": null,
           "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "TeamBName",
+          "jsonName": null,
+          "type": "System.String",
           "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
@@ -5940,7 +6087,7 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
-          "isRequired": true,
+          "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
@@ -5952,7 +6099,7 @@
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
-          "isRequired": true,
+          "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
@@ -5964,7 +6111,7 @@
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
-          "isRequired": true,
+          "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
@@ -6259,6 +6406,51 @@
           "type": "System.DateTime",
           "typeSimple": "string",
           "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Hackathon.Tournaments.GenerateMatchDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "TournamentId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "TeamIds",
+          "jsonName": null,
+          "type": "[System.Guid]",
+          "typeSimple": "[string]",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "StadiumIds",
+          "jsonName": null,
+          "type": "[System.Guid]",
+          "typeSimple": "[string]",
+          "isRequired": true,
           "minLength": null,
           "maxLength": null,
           "minimum": null,

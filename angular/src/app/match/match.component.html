@@ -110,11 +110,16 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
-      			<ngx-datatable-column [name]="'::TournamentId' | abpLocalization" prop="tournamentId"></ngx-datatable-column>
+      			<ngx-datatable-column [name]="'::TournamentId' | abpLocalization" prop="tournamentName"></ngx-datatable-column>
 			<ngx-datatable-column [name]="'::GroupId' | abpLocalization" prop="groupId"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::TeamAId' | abpLocalization" prop="teamAId"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::TeamBId' | abpLocalization" prop="teamBId"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::MatchDate' | abpLocalization" prop="matchDate"></ngx-datatable-column>
+			<ngx-datatable-column [name]="'::TeamAId' | abpLocalization" prop="teamAName"></ngx-datatable-column>
+			<ngx-datatable-column [name]="'::TeamBId' | abpLocalization" prop="teamBName"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::MatchDate' | abpLocalization" prop="matchDate">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.matchDate | date : 'dd/MM/YYYY h:mm a' }}
+        </ng-template>
+      </ngx-datatable-column>
+
 			<ngx-datatable-column [name]="'::TeamAScore' | abpLocalization" prop="teamAScore"></ngx-datatable-column>
 			<ngx-datatable-column [name]="'::TeamBScore' | abpLocalization" prop="teamBScore"></ngx-datatable-column>
 
