@@ -4,6 +4,7 @@ import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StadiumService, StadiumDto, CreateUpdateStadiumDto } from '@proxy/stadiums';
+import { GoogleApiServiceService } from '../api/google-api-service.service';
 
 @Component({
   selector: 'app-stadium',
@@ -19,10 +20,21 @@ export class StadiumComponent implements OnInit  {
   filter: StadiumFilter = {};
   filterHideShow = false;
 
+
+  options: string[] = ['Apple', 'Banana', 'Orange', 'Mango'];
+  filteredOptions: string[] = [];
+
+  filterOptions(input: string): void {
+    this.filteredOptions = this.options.filter(option =>
+      option.toLowerCase().includes(input.toLowerCase())
+    );
+  }
+
   constructor(public readonly list: ListService,
     private service: StadiumService,
     private fb: FormBuilder,
     private confirmation: ConfirmationService,
+    private googleApiServiceService: GoogleApiServiceService,
     private toast: ToasterService) {}
 
   ngOnInit() {
@@ -58,9 +70,9 @@ export class StadiumComponent implements OnInit  {
     this.form = this.fb.group({
       			displayName: [this.selected.displayName, Validators.required],
 			location: [this.selected.location, Validators.required],
-			timeZoneId: [this.selected.timeZoneId, Validators.required],
-			timeZoneDstOffset: [this.selected.timeZoneDstOffset, Validators.required],
-			timeZoneRawOffset: [this.selected.timeZoneRawOffset, Validators.required],
+			// timeZoneId: [this.selected.timeZoneId, Validators.required],
+			// timeZoneDstOffset: [this.selected.timeZoneDstOffset, Validators.required],
+			// timeZoneRawOffset: [this.selected.timeZoneRawOffset, Validators.required],
 
     });
   }
@@ -71,10 +83,10 @@ export class StadiumComponent implements OnInit  {
     }
     const dto: CreateUpdateStadiumDto = {
       			displayName: this.form.get("displayName").value,
-			location: this.form.get("location").value,
-			timeZoneId: this.form.get("timeZoneId").value,
-			timeZoneDstOffset: this.form.get("timeZoneDstOffset").value,
-			timeZoneRawOffset: this.form.get("timeZoneRawOffset").value,
+			location: this.form.get("location").value
+			// timeZoneId: this.form.get("timeZoneId").value,
+			// timeZoneDstOffset: this.form.get("timeZoneDstOffset").value,
+			// timeZoneRawOffset: this.form.get("timeZoneRawOffset").value,
 
     };
     const request = this.selected.id

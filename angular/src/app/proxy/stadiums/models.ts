@@ -2,9 +2,6 @@
 export interface CreateUpdateStadiumDto {
   displayName: string;
   location: string;
-  timeZoneId: string;
-  timeZoneDstOffset: number;
-  timeZoneRawOffset: number;
 }
 
 export interface StadiumDto {

@@ -21,19 +21,6 @@
 				<label for="filter-location">{{ '::Location' | abpLocalization }}</label>
 				<input type="text" class="form-control" [(ngModel)]="filter.location" id="filter-location" />
 			</div>
-			<div class="col-md-2 form-group mb-1">
-				<label for="filter-timeZoneId">{{ '::TimeZoneId' | abpLocalization }}</label>
-				<input type="text" class="form-control" [(ngModel)]="filter.timeZoneId" id="filter-timeZoneId" />
-			</div>
-			<div class="col-md-2 form-group mb-1">
-				<label for="filter-timeZoneDstOffset">{{ '::TimeZoneDstOffset' | abpLocalization }}</label>
-				<input type="text" class="form-control" [(ngModel)]="filter.timeZoneDstOffset" id="filter-timeZoneDstOffset" />
-			</div>
-			<div class="col-md-2 form-group mb-1">
-				<label for="filter-timeZoneRawOffset">{{ '::TimeZoneRawOffset' | abpLocalization }}</label>
-				<input type="text" class="form-control" [(ngModel)]="filter.timeZoneRawOffset" id="filter-timeZoneRawOffset" />
-			</div>
-
 		<div class="col-md-3 mt-2">
         <br />
         <button class="btn btn-warning" (click)="getData()">
@@ -104,10 +91,6 @@
       </ngx-datatable-column>
       			<ngx-datatable-column [name]="'::DisplayName' | abpLocalization" prop="displayName"></ngx-datatable-column>
 			<ngx-datatable-column [name]="'::Location' | abpLocalization" prop="location"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::TimeZoneId' | abpLocalization" prop="timeZoneId"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::TimeZoneDstOffset' | abpLocalization" prop="timeZoneDstOffset"></ngx-datatable-column>
-			<ngx-datatable-column [name]="'::TimeZoneRawOffset' | abpLocalization" prop="timeZoneRawOffset"></ngx-datatable-column>
-
     </ngx-datatable>
   </div>
 </div>
@@ -123,23 +106,16 @@
 				<label for="displayName">{{'::DisplayName' | abpLocalization }}</label><span> * </span>
 				<input type="text" id="displayName" class="form-control" formControlName="displayName" />
 			</div>
+      <!-- <div class="form-group">
+      <input type="text" placeholder="Search..." (input)="filterOptions($event.target.value)">
+<ul>
+  <li *ngFor="let option of filteredOptions">{{ option }}</li>
+</ul>
+</div> -->
 <div class="form-group">
 				<label for="location">{{'::Location' | abpLocalization }}</label><span> * </span>
 				<input type="text" id="location" class="form-control" formControlName="location" />
 			</div>
-<div class="form-group">
-				<label for="timeZoneId">{{'::TimeZoneId' | abpLocalization }}</label><span> * </span>
-				<input type="text" id="timeZoneId" class="form-control" formControlName="timeZoneId" />
-			</div>
-<div class="form-group">
-				<label for="timeZoneDstOffset">{{'::TimeZoneDstOffset' | abpLocalization }}</label><span> * </span>
-				<input type="text" id="timeZoneDstOffset" class="form-control" formControlName="timeZoneDstOffset" />
-			</div>
-<div class="form-group">
-				<label for="timeZoneRawOffset">{{'::TimeZoneRawOffset' | abpLocalization }}</label><span> * </span>
-				<input type="text" id="timeZoneRawOffset" class="form-control" formControlName="timeZoneRawOffset" />
-			</div>
-
     </form>
   </ng-template>
 

@@ -17,6 +17,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
 import { FeatureManagementModule } from '@abp/ng.feature-management';
 import { AbpOAuthModule } from '@abp/ng.oauth';
 import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
     ThemeLeptonXModule.forRoot(),
     SideMenuLayoutModule.forRoot(),
     FeatureManagementModule.forRoot(),
-    InternetConnectionStatusComponent
+    InternetConnectionStatusComponent,
+    HttpClientModule
   ],
   declarations: [AppComponent],
   providers: [APP_ROUTE_PROVIDER],

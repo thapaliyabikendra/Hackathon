@@ -9,11 +9,8 @@ namespace Hackathon.Stadiums
         public string DisplayName { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
-        public string TimeZoneId { get; set; }
-        [Required]
-        public int TimeZoneDstOffset { get; set; }
-        [Required]
-        public int TimeZoneRawOffset { get; set; }
+        public string TimeZoneId { get; set; } = "";
+        public int TimeZoneDstOffset { get; set; } = default ;
+        public int TimeZoneRawOffset { get; set; } = default;
     }
 }
