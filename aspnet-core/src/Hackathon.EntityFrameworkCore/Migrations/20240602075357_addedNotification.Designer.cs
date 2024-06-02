@@ -3,6 +3,7 @@ using System;
 using Hackathon.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Hackathon.Migrations
 {
     [DbContext(typeof(HackathonDbContext))]
-    partial class HackathonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240602075357_addedNotification")]
+    partial class addedNotification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,9 +138,6 @@ namespace Hackathon.Migrations
 
                     b.Property<DateTime>("MatchDate")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("StadiumId")
-                        .HasColumnType("uuid");
 
                     b.Property<Guid>("TeamAId")
                         .HasColumnType("uuid");
