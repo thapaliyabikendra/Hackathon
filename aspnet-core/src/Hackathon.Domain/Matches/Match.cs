@@ -3,6 +3,9 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Hackathon.Matchs
 {
+    /// <summary>
+    ///  test
+    /// </summary>
     public class Match : FullAuditedAggregateRoot<Guid>
     {
         public Guid TournamentId { get; set; }
