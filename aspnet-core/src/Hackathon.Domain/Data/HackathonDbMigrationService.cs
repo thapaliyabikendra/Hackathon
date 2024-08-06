@@ -15,6 +15,7 @@ using Volo.Abp.TenantManagement;
 
 namespace Hackathon.Data;
 
+//Test comment
 public class HackathonDbMigrationService : ITransientDependency
 {
     public ILogger<HackathonDbMigrationService> Logger { get; set; }
